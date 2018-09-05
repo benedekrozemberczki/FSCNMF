@@ -19,24 +19,12 @@ networkx          1.11
 tqdm              4.19.5
 numpy             1.13.3
 pandas            0.20.3
-jsonschema        2.6.0
 texttable         1.2.1
 ```
 
 ### Datasets
 
 The code takes an input graph in a csv file. Every row indicates an edge between two nodes separated by a comma. The first row is a header. Nodes should be indexed starting with 0. Sample graphs for the `Facebook Politicians` and `Facebook Companies` datasets are included in the  `data/` directory.
-
-### Logging
-
-The models are defined in a way that parameter settings and cluster quality is logged in every single epoch. Specifically we log the followings:
-
-```
-1. Hyperparameter settings.     We save each hyperparameter used in the experiment.
-2. Cost per epoch.              Embedding, clustering and regularization cost are stored depending on the model type.
-3. Cluster quality.             Measured by modularity. We calculate it both for the classical and neural clusterings per epoch.
-4. Runtime.                     We measure the time needed for optimization and data generation per epoch -- measured by seconds.
-```
 
 ### Options
 
@@ -52,26 +40,6 @@ Learning of the embedding is handled by the `src/embedding_clustering.py` script
   --assignment-output STR       Node-cluster assignment dictionary path.          Default is `output/assignments/politician.json`.
   --dump-matrices BOOL          Whether the trained model should be saved.        Default is `True`.
   --model STR                   The model type.                                   Default is `GEMSECWithRegularization`.
-```
-
-
-#### Random walk options
-
-```
-  --walker STR                  Random walker order (first/second).               Default is `first`.
-  --P FLOAT                     Return hyperparameter for second-order walk.      Default is 1.0
-  --Q FLOAT                     In-out hyperparameter for second-order walk.      Default is 1.0.
-```
-
-#### Skipgram options
-
-```
-  --dimensions INT                Number of dimensions.                               Default is 16.
-  --random-walk-length INT        Length of random walk per source.                   Default is 80.
-  --num-of-walks INT              Number of random walks per source.                  Default is 5.
-  --window-size INT               Window size for proximity statistic extraction.     Default is 5.
-  --distortion FLOAT              Downsampling distortion.                            Default is 0.75.
-  --negative-sample-number INT    Number of negative samples to draw.                 Default is 10.
 ```
 
 #### Model options
