@@ -119,15 +119,3 @@ Creating a clustered embedding of the default dataset in 32 dimensions, 20 seque
 ```
 python src/embedding_clustering.py --dimensions 32 --num-of-walks 20 --random-walk-length 160 --cluster-number 10
 ```
-
-### Citing
-
-If you find GEMSEC useful in your research, please consider citing the following paper:
-
->@misc{1802.03997,    
-       author = {Benedek Rozemberczki and Ryan Davies and Rik Sarkar and Charles Sutton},    
-       title = {GEMSEC: Graph Embedding with Self Clustering},   
-       year = {2018},    
-       eprint = {arXiv:1802.03997}
-       }
-
