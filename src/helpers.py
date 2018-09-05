@@ -80,17 +80,20 @@ def parameter_parser():
     parser.add_argument('--gamma',
                         type = float,
                         default = 0.5,
-	                help = 'Down sampling rate for frequent features. Default is 0.0001.')
+	                help = 'Down sampling rate for frequent features. Default is 0.5.')
 
     parser.add_argument('--lower-control',
                         type = float,
                         default = 10**-15,
-	                help = 'Down sampling rate for frequent features. Default is 0.0001.')
+	                help = 'Numeric overflow control. Default is 10**-15.')
     
     return parser.parse_args()
 
 def normalize_adjacency(graph):
     """
+    Method to calculate a sparse degree normalized adjacency matrix.
+    :param graph: Sparse graph adjacency matrix.
+    :return A: Normalized adjacency matrix.
     """
     ind = range(len(graph.nodes()))
     degs = [1.0/graph.degree(node) for node in graph.nodes()]
@@ -101,6 +104,10 @@ def normalize_adjacency(graph):
 
 def read_graph(edge_path, order):
     """
+    Method to read graph and create a target matrix with pooled adjacency matrix powers up to the order.
+    :param edge_path: Path to the ege list.
+    :param order: Order of approximations.
+    :return out_A: Target matrix.
     """
     print("Target matrix creation started.")
     graph = nx.from_edgelist(pd.read_csv(edge_path).values.tolist())
@@ -118,6 +125,9 @@ def read_graph(edge_path, order):
 
 def read_features(feature_path):
     """
+    Method to get nod feaures.
+    :param feature_path: Path to the node features.
+    :return X: Node features.
     """
     features = pd.read_csv(feature_path)
     X = np.array(features)[:,1:]
