@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 from scipy import sparse
 from tqdm import tqdm
+from texttable import Texttable
 
 def parameter_parser():
 
@@ -126,3 +127,14 @@ def read_features(feature_path):
     features = pd.read_csv(feature_path)
     X = np.array(features)[:,1:]
     return X
+
+def tab_printer(args):
+    """
+    Function to print the logs in a nice tabular format.
+    :param args: Parameters used for the model.
+    """
+    args = vars(args)
+
+    t = Texttable() 
+    t.add_rows([["Parameter", "Value"]] +  [[k.replace("_"," ").capitalize(),v] for k,v in args.iteritems()])
+    print t.draw()

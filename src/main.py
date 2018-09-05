@@ -1,5 +1,5 @@
 from fscnmf import FSCNMF
-from helpers import parameter_parser, read_graph, read_features
+from helpers import parameter_parser, read_graph, read_features, tab_printer
 
 def learn_model(args):
     """
@@ -12,4 +12,5 @@ def learn_model(args):
 
 if __name__ == "__main__":
     args = parameter_parser()
+    tab_printer(args)
     learn_model(args)
