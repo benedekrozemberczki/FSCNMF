@@ -2,15 +2,12 @@ FSCNMF
 ============================================
 <p align="justify">
 An implementation of "Fusing Structure and Content via Non-negative Matrix Factorization for Embedding Information Networks". GEMSEC is a graph embedding algorithm which learns an embedding and clustering jointly. The procedure places nodes in an abstract feature space where the vertex features minimize the negative log likelihood of preserving sampled vertex neighborhoods while the nodes are clustered into a fixed number of groups in this space. GEMSEC is a general extension of earlier work in the domain as it is an augmentation of the core optimization problem of sequence based graph embedding procedures and it is agnostic of the neighborhood sampling strategy (first/second-order random walks).
-  
-The second-order random walks sampling methods were taken from the reference implementation of [Node2vec](https://github.com/aditya-grover/node2vec).
-</p>
 
-This repository provides a reference implementation for GEMSEC as described in the paper:
-> GEMSEC: Graph Embedding with Self Clustering.
-> [Benedek Rozemberczki](http://homepages.inf.ed.ac.uk/s1668259/), [Ryan Davies](https://www.inf.ed.ac.uk/people/students/Ryan_Davies.html), [Rik Sarkar](https://homepages.inf.ed.ac.uk/rsarkar/) and [Charles Sutton](http://homepages.inf.ed.ac.uk/csutton/) .
+This repository provides an implementation for FSCNMF as described in the paper:
+> FSCNMF: Fusing Structure and Content via Non-negative Matrix Factorization for Embedding Information Networks.
+> Sambaran Bandyopadhyay, Harsh Kara, Aswin Kannan and M N Murty
 > arXiv, 2018.
->https://arxiv.org/abs/1802.03997
+>https://arxiv.org/pdf/1804.05313.pdf
 
 
 ### Requirements
@@ -22,10 +19,8 @@ networkx          1.11
 tqdm              4.19.5
 numpy             1.13.3
 pandas            0.20.3
-tensorflow-gpu    1.3.0
 jsonschema        2.6.0
 texttable         1.2.1
-python-louvain    0.11
 ```
 
 ### Datasets
