@@ -19,15 +19,17 @@ tqdm              4.19.5
 numpy             1.13.3
 pandas            0.20.3
 texttable         1.2.1
+scipy             1.1.0
+argparse          1.1.0
 ```
 
 ### Datasets
 
-The code takes an input graph in a csv file. Every row indicates an edge between two nodes separated by a comma. The first row is a header. Nodes should be indexed starting with 0. Sample graphs for the `Facebook Politicians` and `Facebook Companies` datasets are included in the  `data/` directory.
+The code takes an input graph in a csv file. Every row indicates an edge between two nodes separated by a comma. The first row is a header. Nodes should be indexed starting with 0. A sample graph for the `Wikipedia Giraffes` is included in the  `input/` directory.
 
 ### Options
 
-Learning of the embedding is handled by the `src/embedding_clustering.py` script which provides the following command line arguments.
+Learning of the embedding is handled by the `src/main.py` script which provides the following command line arguments.
 
 #### Input and output options
 
@@ -35,10 +37,6 @@ Learning of the embedding is handled by the `src/embedding_clustering.py` script
   --input STR                   Input graph path.                                 Default is `data/politician_edges.csv`.
   --embedding-output STR        Embeddings path.                                  Default is `output/embeddings/politician_embedding.csv`.
   --cluster-mean-output STR     Cluster centers path.                             Default is `output/cluster_means/politician_means.csv`.
-  --log-output STR              Log path.                                         Default is `output/logs/politician.log`.
-  --assignment-output STR       Node-cluster assignment dictionary path.          Default is `output/assignments/politician.json`.
-  --dump-matrices BOOL          Whether the trained model should be saved.        Default is `True`.
-  --model STR                   The model type.                                   Default is `GEMSECWithRegularization`.
 ```
 
 #### Model options
