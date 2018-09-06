@@ -34,29 +34,32 @@ Learning of the embedding is handled by the `src/main.py` script which provides 
 #### Input and output options
 
 ```
-  --input STR                   Input graph path.                                 Default is `data/politician_edges.csv`.
-  --embedding-output STR        Embeddings path.                                  Default is `output/embeddings/politician_embedding.csv`.
-  --cluster-mean-output STR     Cluster centers path.                             Default is `output/cluster_means/politician_means.csv`.
+  --edge-path STR           Input graph path.           Default is `input/giraffe_edges.csv`.
+  --feature-path STR        Input Features path.        Default is `input/giraffe_features.csv`.
+  --output-path STR         Embedding path.             Default is `output/giraffe_fscnmf.csv`.
 ```
 
 #### Model options
 
 ```
-  --initial-learning-rate FLOAT   Initial learning rate.                                        Default is 0.001.
-  --minimal-learning-rate FLOAT   Final learning rate.                                          Default is 0.0001.
-  --annealing-factor FLOAT        Annealing factor for learning rate.                           Default is 1.0.
-  --initial-gamma FLOAT           Initial clustering weight coefficient.                        Default is 0.1.
-  --lambd FLOAR                   Smoothness regularization penalty.                            Default is 0.0625.
-  --cluster-number INT            Number of clusters.                                           Default is 20.
-  --overlap-weighting STR         Weight construction technique for regularization.             Default is `normalized_overlap`.
-  --regularization-noise FLOAT    Uniform noise max and min on the feature vector distance.     Default is 10**-8.
+  --dimensions INT         Number of embeding dimensions.                                           Default is 20.
+  --order INT              Order of adjacency matrix powers.                                           Default is 20.
+  --iterations INT         Number of power interations.                                           Default is 20.
+  --alpha_1 FLOAT          Initial learning rate.                                        Default is 0.001.
+  --alpha_2 FLOAT          Final learning rate.                                          Default is 0.0001.
+  --alpha_3 FLOAT          Annealing factor for learning rate.                           Default is 1.0.
+  --beta_1  FLOAT          Initial learning rate.                                        Default is 0.001.
+  --beta_2  FLOAT          Final learning rate.                                          Default is 0.0001.
+  --beta_3  FLOAT          Annealing factor for learning rate.                           Default is 1.0.
+  --gamma FLOAT            Embedding mixing parameter.                           Default is 1.0.  
+  --lower-control FLOAT    Overflow control parameter.                           Default is 1.0.  
 ```
 
 ### Examples
 
-The following commands learn a graph embedding and cluster center and writes them to disk. The node representations are ordered by the ID.
+The following commands learn a graph embedding and write the embedding to disk. The node representations are ordered by the ID.
 
-Creating a GEMSEC embedding of the default dataset with the default hyperparameter settings. Saving the embedding, cluster centres and the log file at the default path.
+Creating aN FSCNMF embedding of the default dataset with the default hyperparameter settings. Saving the embedding at the default path.
 
 ```
 python src/embedding_clustering.py
