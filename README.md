@@ -62,28 +62,22 @@ The following commands learn a graph embedding and write the embedding to disk. 
 Creating aN FSCNMF embedding of the default dataset with the default hyperparameter settings. Saving the embedding at the default path.
 
 ```
-python src/embedding_clustering.py
+python src/main.py
 ```
-Creating a DeepWalk embedding of the default dataset with the default hyperparameter settings. Saving the embedding, cluster centres and the log file at the default path.
+Creating an FSCNMF embedding of the default dataset with 128 dimensions and approximation order 1.
 
 ```
-python src/embedding_clustering.py --model DeepWalk
+python src/main.py --dimensions 128 --order 1
 ```
 
-Turning off the model saving.
+Creating an FSCNMF embedding of the default dataset with asymmetric mixing.
 
 ```
-python src/embedding_clustering.py --dump-matrices False
+python src/main.py --gamma 0.1
 ```
 
-Creating an embedding of an other dataset the `Facebook Companies`. Saving the output and the log in a custom place.
+Creating an embedding of an other dataset the `Wikipedia Dogs`. Saving the output in a custom folder.
 
 ```
-python src/embedding_clustering.py --input data/company_edges.csv  --embedding-output output/embeddings/company_embedding.csv --log-output output/cluster_means/company_means.csv --cluster-mean-output output/logs/company.json
-```
-
-Creating a clustered embedding of the default dataset in 32 dimensions, 20 sequences per source node with length 160 and 10 cluster centers.
-
-```
-python src/embedding_clustering.py --dimensions 32 --num-of-walks 20 --random-walk-length 160 --cluster-number 10
+python src/main.py 
 ```
