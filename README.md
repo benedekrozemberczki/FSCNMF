@@ -79,5 +79,5 @@ python src/main.py --gamma 0.1
 Creating an embedding of an other dataset the `Wikipedia Dogs`. Saving the output in a custom folder.
 
 ```
-python src/main.py 
+python src/main.py --edge-path input/dog_edges.csv --feature-path input/dog_features.csv --output-path output/dog_fscnmf.csv
 ```
