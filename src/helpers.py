@@ -1,15 +1,15 @@
+import json
 import argparse
-import networkx as nx
-import pandas as pd
 import numpy as np
-from scipy import sparse
+import pandas as pd
+import networkx as nx
 from tqdm import tqdm
+from scipy import sparse
 from texttable import Texttable
 
 def parameter_parser():
-
     """
-    A method to parse up command line parameters. By default it gives an embedding of the Wiki Giraffes.
+    A method to parse up command line parameters. By default it gives an embedding of the Wiki Chameleons.
     The default hyperparameters give a good quality representation without grid search.
     Representations are sorted by node ID.
     """
@@ -19,18 +19,23 @@ def parameter_parser():
 
     parser.add_argument('--edge-path',
                         nargs = '?',
-                        default = './input/giraffe_edges.csv',
+                        default = './input/chameleon_edges.csv',
 	                help = 'Edge list csv.')
 
     parser.add_argument('--feature-path',
                         nargs = '?',
-                        default = './input/giraffe_features.csv',
+                        default = './input/chameleon_features.json',
 	                help = 'Node features csv.')
 
     parser.add_argument('--output-path',
                         nargs = '?',
-                        default = './output/giraffe_fscnmf.csv',
+                        default = './output/chameleon_fscnmf.csv',
 	                help = 'Target embedding csv.')
+
+    parser.add_argument('--features',
+                        nargs = '?',
+                        default = 'sparse',
+	                help = 'Feature matrix structure.')
 
     parser.add_argument('--dimensions',
                         type = int,
@@ -125,13 +130,32 @@ def read_graph(edge_path, order):
 
 def read_features(feature_path):
     """
-    Method to get nod feaures.
+    Method to get node feaures.
     :param feature_path: Path to the node features.
     :return X: Node features.
     """
     features = pd.read_csv(feature_path)
-    X = np.array(features)[:,1:]
-    return X
+    features = np.array(features)[:,1:]
+    return features
+
+def read_sparse_features(feature_path):
+    """
+    Reading the feature matrix stored as JSON from the disk.
+    :param feature_path: Path to the JSON file.
+    :return features: Feature sparse COO matrix.
+    """
+
+    features = json.load(open(feature_path))
+    index_1 = [int(k) for k,v in features.iteritems() for fet in v]
+    index_2 = [int(fet) for k,v in features.iteritems() for fet in v]
+    values = [1.0]*len(index_1) 
+
+    nodes = map(lambda x: int(x),features.keys())
+    node_count = max(nodes)+1
+
+    feature_count = max(index_2)+1
+    features = sparse.csr_matrix(sparse.coo_matrix((values,(index_1,index_2)),shape=(node_count,feature_count),dtype=np.float32))
+    return features
 
 def tab_printer(args):
     """
@@ -139,7 +163,7 @@ def tab_printer(args):
     :param args: Parameters used for the model.
     """
     args = vars(args)
-
+    keys = sorted(args.keys())
     t = Texttable() 
-    t.add_rows([["Parameter", "Value"]] +  [[k.replace("_"," ").capitalize(),v] for k,v in args.iteritems()])
+    t.add_rows([["Parameter", "Value"]] +  [[k.replace("_"," ").capitalize(),args[k]] for k in keys])
     print t.draw()

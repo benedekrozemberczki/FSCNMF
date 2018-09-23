@@ -1,5 +1,5 @@
-from fscnmf import FSCNMF
-from helpers import parameter_parser, read_graph, read_features, tab_printer
+from fscnmf import DenseFSCNMF, SparseFSCNMF
+from helpers import parameter_parser, read_graph, read_features, read_sparse_features, tab_printer
 
 def learn_model(args):
     """
@@ -7,8 +7,12 @@ def learn_model(args):
     :param args: Arguments object.
     """
     A = read_graph(args.edge_path, args.order)
-    X = read_features(args.feature_path)
-    model = FSCNMF(A, X, args)
+    if args.features == "dense":
+        X = read_features(args.feature_path)
+        model = DenseFSCNMF(A, X, args)
+    elif args.features == "sparse":
+        X = read_sparse_features(args.feature_path)
+        model = SparseFSCNMF(A, X, args)
     model.optimize()
     model.save_embedding()
 
