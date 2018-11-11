@@ -146,11 +146,11 @@ def read_sparse_features(feature_path):
     """
 
     features = json.load(open(feature_path))
-    index_1 = [int(k) for k,v in features.iteritems() for fet in v]
-    index_2 = [int(fet) for k,v in features.iteritems() for fet in v]
+    index_1 = [int(k) for k,v in features.items() for fet in v]
+    index_2 = [int(fet) for k,v in features.items() for fet in v]
     values = [1.0]*len(index_1) 
 
-    nodes = map(lambda x: int(x),features.keys())
+    nodes = [int(k) for k,v in features.items()]
     node_count = max(nodes)+1
 
     feature_count = max(index_2)+1
@@ -166,4 +166,4 @@ def tab_printer(args):
     keys = sorted(args.keys())
     t = Texttable() 
     t.add_rows([["Parameter", "Value"]] +  [[k.replace("_"," ").capitalize(),args[k]] for k in keys])
-    print t.draw()
+    print(t.draw())
