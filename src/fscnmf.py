@@ -85,10 +85,10 @@ class FSCNMF(object):
         """
         t = Texttable() 
         t.add_rows([["Losses"]])
-        print t.draw()
+        print(t.draw())
         t = Texttable() 
         t.add_rows([["Iteration","Loss B1", "Loss B2", "Loss U", "Loss V"]] +  self.losses)
-        print t.draw()
+        print(t.draw())
 
     def optimize(self):
         """
@@ -111,7 +111,7 @@ class FSCNMF(object):
         print("Saving the embedding.")
         self.out = self.args.gamma*self.B_1+(1-self.args.gamma)*self.U
         self.out = np.concatenate([np.array(range(self.A.shape[0])).reshape(-1,1),self.out],axis=1)
-        self.out = pd.DataFrame(self.out,columns = ["id"] + map(lambda x: "X_"+str(x),range(self.args.dimensions)))
+        self.out = pd.DataFrame(self.out,columns = ["id"] + [ "X_"+str(dim) for dim in range(self.args.dimensions)])
         self.out.to_csv(self.args.output_path, index = None)
 
 
