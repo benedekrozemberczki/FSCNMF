@@ -131,7 +131,7 @@ class DenseFSCNMF(FSCNMF):
 
 class SparseFSCNMF(FSCNMF):
     """
-    Dense Fused Structure-Content Non-negative Matrix Factorization Machine.
+    Sparse Fused Structure-Content Non-negative Matrix Factorization Machine.
     """
     def update_V(self):
         """
