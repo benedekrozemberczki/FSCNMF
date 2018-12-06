@@ -83,7 +83,7 @@ Learning of the embedding is handled by the `src/main.py` script which provides 
 
 The following commands learn a graph embedding and write the embedding to disk. The node representations are ordered by the ID.
 
-Creating aN FSCNMF embedding of the default dataset with the default hyperparameter settings. Saving the embedding at the default path.
+Creating an FSCNMF embedding of the default dataset with the default hyperparameter settings. Saving the embedding at the default path.
 
 ```
 python src/main.py
