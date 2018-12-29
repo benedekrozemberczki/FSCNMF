@@ -17,80 +17,80 @@ def parameter_parser():
     parser = argparse.ArgumentParser(description = "Run FSCNMF.")
 
 
-    parser.add_argument('--edge-path',
-                        nargs = '?',
-                        default = './input/chameleon_edges.csv',
-	                help = 'Edge list csv.')
+    parser.add_argument("--edge-path",
+                        nargs = "?",
+                        default = "./input/chameleon_edges.csv",
+	                help = "Edge list csv.")
 
-    parser.add_argument('--feature-path',
-                        nargs = '?',
-                        default = './input/chameleon_features.json',
-	                help = 'Node features csv.')
+    parser.add_argument("--feature-path",
+                        nargs = "?",
+                        default = "./input/chameleon_features.json",
+	                help = "Node features csv.")
 
-    parser.add_argument('--output-path',
-                        nargs = '?',
-                        default = './output/chameleon_fscnmf.csv',
-	                help = 'Target embedding csv.')
+    parser.add_argument("--output-path",
+                        nargs = "?",
+                        default = "./output/chameleon_fscnmf.csv",
+	                help = "Target embedding csv.")
 
-    parser.add_argument('--features',
-                        nargs = '?',
-                        default = 'sparse',
-	                help = 'Feature matrix structure.')
+    parser.add_argument("--features",
+                        nargs = "?",
+                        default = "sparse",
+	                help = "Feature matrix structure.")
 
-    parser.add_argument('--dimensions',
+    parser.add_argument("--dimensions",
                         type = int,
                         default = 32,
-	                help = 'Number of dimensions. Default is 32.')
+	                help = "Number of dimensions. Default is 32.")
 
-    parser.add_argument('--order',
+    parser.add_argument("--order",
                         type = int,
                         default = 2,
-	                help = 'Order of approximation. Default is 2.')
+	                help = "Order of approximation. Default is 2.")
 
-    parser.add_argument('--iterations',
+    parser.add_argument("--iterations",
                         type = int,
                         default = 500,
-	                help = 'Number of iterations. Default is 500.')
+	                help = "Number of iterations. Default is 500.")
 
-    parser.add_argument('--alpha_1',
+    parser.add_argument("--alpha_1",
                         type = float,
                         default = 1000.0,
-	                help = 'Alignment parameter for adjacency matrix. Default is 1000.0.')
+	                help = "Alignment parameter for adjacency matrix. Default is 1000.0.")
 
-    parser.add_argument('--alpha_2',
+    parser.add_argument("--alpha_2",
                         type = float,
                         default = 1.0,
-	                help = 'Adjacency basis factor matrix regularization parameter. Default is 1.0.')
+	                help = "Adjacency basis factor matrix regularization parameter. Default is 1.0.")
 
-    parser.add_argument('--alpha_3',
+    parser.add_argument("--alpha_3",
                         type = float,
                         default = 1.0,
-	                help = 'Adjacency feature factor matrix regularization parameter. Default is 1.0.')
+	                help = "Adjacency feature factor matrix regularization parameter. Default is 1.0.")
 
-    parser.add_argument('--beta_1',
+    parser.add_argument("--beta_1",
                         type = float,
                         default = 1000.0,
-	                help = 'Alignment parameter for feature matrix. Default is 1000.0.')
+	                help = "Alignment parameter for feature matrix. Default is 1000.0.")
 
-    parser.add_argument('--beta_2',
+    parser.add_argument("--beta_2",
                         type = float,
                         default = 1.0,
-	                help = 'Node basis factor matrix regularization parameter. Default is 1.0.')
+	                help = "Node basis factor matrix regularization parameter. Default is 1.0.")
 
-    parser.add_argument('--beta_3',
+    parser.add_argument("--beta_3",
                         type = float,
                         default = 1.0,
-	                help = 'Node feature factor matrix regularization parameter. Default is 1.0.')
+	                help = "Node feature factor matrix regularization parameter. Default is 1.0.")
 
-    parser.add_argument('--gamma',
+    parser.add_argument("--gamma",
                         type = float,
                         default = 0.5,
-	                help = 'Down sampling rate for frequent features. Default is 0.5.')
+	                help = "Down sampling rate for frequent features. Default is 0.5.")
 
-    parser.add_argument('--lower-control',
+    parser.add_argument("--lower-control",
                         type = float,
                         default = 10**-15,
-	                help = 'Numeric overflow control. Default is 10**-15.')
+	                help = "Numeric overflow control. Default is 10**-15.")
     
     return parser.parse_args()
 
