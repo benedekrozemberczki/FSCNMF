@@ -8,6 +8,7 @@ from texttable import Texttable
 class FSCNMF(object):
     """
     Fused Structure-Content Non-negative Matrix Factorization Machine Abstract Class.
+    For details see:  https://arxiv.org/pdf/1804.05313.pdf.
     """
     def __init__(self, A, X, args):
         """
