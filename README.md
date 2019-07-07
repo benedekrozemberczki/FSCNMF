@@ -10,7 +10,9 @@ This repository provides an implementation for FSCNMF as described in the paper:
 > FSCNMF: Fusing Structure and Content via Non-negative Matrix Factorization for Embedding Information Networks.
 > Sambaran Bandyopadhyay, Harsh Kara, Aswin Kannan and M N Murty
 > arXiv, 2018.
->https://arxiv.org/pdf/1804.05313.pdf
+> https://arxiv.org/pdf/1804.05313.pdf
+
+Alternative implementations are available [[here]](https://github.com/sambaranban/FSCNMF) and [[here]](https://github.com/hkara657/FSCNMF).
 
 
 ### Requirements
