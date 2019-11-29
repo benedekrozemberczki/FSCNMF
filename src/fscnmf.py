@@ -1,3 +1,5 @@
+"""Fused Structure-Content Non-negative Matrix Factorization Machine Abstract Class."""
+
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
@@ -26,10 +28,10 @@ class FSCNMF(object):
         """
         Setup basis and feature matrices.
         """
-        self.U = np.random.uniform(0,1,(self.A.shape[0],self.args.dimensions))
-        self.V = np.random.uniform(0,1,(self.args.dimensions,self.X.shape[1]))
-        self.B_1 = np.random.uniform(0,1,(self.A.shape[0],self.args.dimensions))
-        self.B_2 = np.random.uniform(0,1,(self.args.dimensions,self.A.shape[0]))
+        self.U = np.random.uniform(0, 1, (self.A.shape[0], self.args.dimensions))
+        self.V = np.random.uniform(0, 1, (self.args.dimensions, self.X.shape[1]))
+        self.B_1 = np.random.uniform(0, 1, (self.A.shape[0], self.args.dimensions))
+        self.B_2 = np.random.uniform(0, 1, (self.args.dimensions, self.A.shape[0]))
         self.losses = []
 
     def update_B1(self):
@@ -37,30 +39,33 @@ class FSCNMF(object):
         Update node bases.
         """
         simi_term = self.A.dot(np.transpose(self.B_2)) + self.args.alpha_1*self.U
-        regul = self.args.alpha_1*np.eye(self.args.dimensions)+self.args.alpha_2*np.eye(self.args.dimensions)
+        regul = self.args.alpha_1*np.eye(self.args.dimensions)
+        regul = regul + self.args.alpha_2*np.eye(self.args.dimensions)
         covar_term = inv(np.dot(self.B_2, np.transpose(self.B_2))+regul)
-        self.B_1 = np.dot(simi_term,covar_term)
-        self.B_1[self.B_1 < self.args.lower_control] =  self.args.lower_control
+        self.B_1 = np.dot(simi_term, covar_term)
+        self.B_1[self.B_1 < self.args.lower_control] = self.args.lower_control
 
     def update_B2(self):
         """
         Update node features.
         """
-        covar_term = inv(np.dot(np.transpose(self.B_1),self.B_1)+self.args.alpha_3*np.eye(self.args.dimensions))
+        to_inv = np.dot(np.transpose(self.B_1), self.B_1)
+        to_inv = to_inv + self.args.alpha_3*np.eye(self.args.dimensions)
+        covar_term = inv(to_inv)
         simi_term = self.A.dot(self.B_1).transpose()
         self.B_2 = covar_term.dot(simi_term)
-        self.B_2[self.B_2 < self.args.lower_control] =  self.args.lower_control
-
+        self.B_2[self.B_2 < self.args.lower_control] = self.args.lower_control
 
     def update_U(self):
         """
         Update feature basis.
         """
         simi_term = self.X.dot(np.transpose(self.V)) + self.args.beta_1*self.B_1
-        regul = self.args.beta_1*np.eye(self.args.dimensions)+self.args.beta_2*np.eye(self.args.dimensions)
+        regul = self.args.beta_1*np.eye(self.args.dimensions)
+        regul = regul + self.args.beta_2*np.eye(self.args.dimensions)
         covar_term = inv(np.dot(self.V, np.transpose(self.V))+regul)
-        self.U = np.dot(simi_term,covar_term)
-        self.U[self.U < self.args.lower_control] =  self.args.lower_control
+        self.U = np.dot(simi_term, covar_term)
+        self.U[self.U < self.args.lower_control] = self.args.lower_control
 
     def update_V(self):
         """
@@ -84,11 +89,12 @@ class FSCNMF(object):
         """
         Printing the losses in tabular format.
         """
-        t = Texttable() 
+        t = Texttable()
         t.add_rows([["Losses"]])
         print(t.draw())
-        t = Texttable() 
-        t.add_rows([["Iteration","Loss B1", "Loss B2", "Loss U", "Loss V"]] +  self.losses)
+        t = Texttable()
+        t.add_rows([["Iteration", "Loss B1", "Loss B2", "Loss U", "Loss V"]])
+        t.add_rows(self.losses)
         print(t.draw())
 
     def optimize(self):
@@ -111,10 +117,11 @@ class FSCNMF(object):
         """
         print("Saving the embedding.")
         self.out = self.args.gamma*self.B_1+(1-self.args.gamma)*self.U
-        self.out = np.concatenate([np.array(range(self.A.shape[0])).reshape(-1,1),self.out],axis=1)
-        self.out = pd.DataFrame(self.out,columns = ["id"] + [ "X_"+str(dim) for dim in range(self.args.dimensions)])
-        self.out.to_csv(self.args.output_path, index = None)
-
+        to_concat = [np.array(range(self.A.shape[0])).reshape(-1, 1), self.out]
+        self.out = np.concatenate(to_concat, axis=1)
+        cols = ["id"] + ["x_"+str(d) for d in range(self.args.dimensions)]
+        self.out = pd.DataFrame(self.out, columns=cols)
+        self.out.to_csv(self.args.output_path, index=None)
 
 class DenseFSCNMF(FSCNMF):
     """
@@ -124,11 +131,12 @@ class DenseFSCNMF(FSCNMF):
         """
         Update features.
         """
-        covar_term = inv(np.dot(np.transpose(self.U),self.U)+self.args.beta_3*np.eye(self.args.dimensions))
-        simi_term = np.dot(np.transpose(self.U),self.X) 
-        self.V = np.dot(covar_term,simi_term)
-        self.V[self.V < self.args.lower_control] =  self.args.lower_control
- 
+        to_inv = np.dot(np.transpose(self.U), self.U)
+        to_inv = to_inv + self.args.beta_3*np.eye(self.args.dimensions)
+        covar_term = inv(to_inv)
+        simi_term = np.dot(np.transpose(self.U), self.X)
+        self.V = np.dot(covar_term, simi_term)
+        self.V[self.V < self.args.lower_control] = self.args.lower_control
 
 class SparseFSCNMF(FSCNMF):
     """
@@ -138,7 +146,9 @@ class SparseFSCNMF(FSCNMF):
         """
         Update features.
         """
-        covar_term = inv(np.dot(np.transpose(self.U),self.U)+self.args.beta_3*np.eye(self.args.dimensions))
+        to_inv = np.dot(np.transpose(self.U), self.U)
+        to_inv = to_inv + self.args.beta_3*np.eye(self.args.dimensions)
+        covar_term = inv(to_inv)
         simi_term = self.X.transpose().dot(self.U)
-        self.V = np.dot(simi_term,covar_term).transpose()
-        self.V[self.V < self.args.lower_control] =  self.args.lower_control
+        self.V = np.dot(simi_term, covar_term).transpose()
+        self.V[self.V < self.args.lower_control] = self.args.lower_control
