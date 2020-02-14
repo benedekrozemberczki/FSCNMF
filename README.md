@@ -1,4 +1,5 @@
 FSCNMF ![GitHub stars](https://img.shields.io/github/stars/benedekrozemberczki/FSCNMF.svg?style=plastic) ![GitHub forks](https://img.shields.io/github/forks/benedekrozemberczki/FSCNMF.svg?color=blue&style=plastic) ![License](https://img.shields.io/github/license/benedekrozemberczki/FSCNMF.svg?color=blue&style=plastic)
+[![Arxiv](https://img.shields.io/badge/ArXiv-1804.05313-orange.svg?color=blue&style=plastic)](https://arxiv.org/abs/1804.05313)
 ============================================
 ### Abstract
 
