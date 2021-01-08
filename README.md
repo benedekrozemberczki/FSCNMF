@@ -1,7 +1,7 @@
 FSCNMF 
 ============================================
-![License](https://img.shields.io/github/license/benedekrozemberczki/FSCNMF.svg?color=blue&style=plastic)
-[![Arxiv](https://img.shields.io/badge/ArXiv-1804.05313-orange.svg?color=blue&style=plastic)](https://arxiv.org/abs/1804.05313) [![codebeat badge](https://codebeat.co/badges/634f94aa-60be-4c9b-8b25-ea3bb07ab11a)](https://codebeat.co/projects/github-com-benedekrozemberczki-fscnmf-master) [![repo size](https://img.shields.io/github/repo-size/benedekrozemberczki/FSCNMF.svg)](https://github.com/benedekrozemberczki/FSCNMF/archive/master.zip)
+![License](https://img.shields.io/github/license/benedekrozemberczki/FSCNMF.svg?color=blue)
+[![Arxiv](https://img.shields.io/badge/ArXiv-1804.05313-orange.svg?color=blue)](https://arxiv.org/abs/1804.05313) [![codebeat badge](https://codebeat.co/badges/634f94aa-60be-4c9b-8b25-ea3bb07ab11a)](https://codebeat.co/projects/github-com-benedekrozemberczki-fscnmf-master) [![repo size](https://img.shields.io/github/repo-size/benedekrozemberczki/FSCNMF.svg)](https://github.com/benedekrozemberczki/FSCNMF/archive/master.zip)
 ### Abstract
 
 <p align="justify">
