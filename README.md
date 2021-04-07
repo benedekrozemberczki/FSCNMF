@@ -11,7 +11,7 @@ An implementation of Fusing Structure and Content via Non-negative Matrix Factor
 
 The model is now also available in the package [Karate Club](https://github.com/benedekrozemberczki/karateclub).
 
-This repository provides an implementation for FSCNMF as described in the paper:
+This repository provides an implementation for **FSCNMF** as described in the paper:
 > FSCNMF: Fusing Structure and Content via Non-negative Matrix Factorization for Embedding Information Networks.
 > Sambaran Bandyopadhyay, Harsh Kara, Aswin Kannan and M N Murty
 > arXiv, 2018.
