@@ -114,3 +114,5 @@ Creating an embedding of an other dense structured dataset the `Wikipedia Giraff
 ```sh
 $ python src/main.py --edge-path input/giraffe_edges.csv --feature-path input/giraffe_features.csv --output-path output/giraffe_fscnmf.csv --features dense
 ```
+
+--------------------------------------------------------------------------------
