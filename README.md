@@ -20,7 +20,7 @@ This repository provides an implementation for **FSCNMF** as described in the pa
 Alternative implementations are available [[here]](https://github.com/sambaranban/FSCNMF) and [[here]](https://github.com/hkara657/FSCNMF).
 
 
---------------------------------------------------------------------------------
+--------------------------------------------------------------
 
 
 ### Requirements
